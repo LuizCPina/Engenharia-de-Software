@@ -16,3 +16,7 @@ print(f"[green]Status Code de algo que nao existe:[/green] {response.status_code
 
 response = requests.get("https://api.github.com/search/repositories",params =  "")
 print(f"[green]Status Code de entidade nao processavel:[/green] {response.status_code}")
+
+response = requests.get("https://chatgpt.com/")
+print(f"[green]Status Code do ChatGPT:[/green] {response.status_code}")
+
