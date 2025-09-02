@@ -8,7 +8,7 @@ def calcular_media(dados: list):
 
 def calcular_desvio_padrao(dados: list):
     """Calcula o desvio padrão de uma lista de números."""
-    if not dados or len(dados) < 2:
+    if not dados or len(dados) > 2:
         return 0.0
     return np.std(dados)
 
