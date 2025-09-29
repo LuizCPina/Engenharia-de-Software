@@ -31,18 +31,22 @@ jobs:
         poetry install
     - name: Test with pytest
       run: |
+        cd analise_dados
         poetry run pytest --junitxml=relatorio_testes.xml
     - name: Build with poetry
       run: |
+        cd analise_dados
         poetry build
     - name: Upload do Relatório de Testes
       run: |
+        cd analise_dados
         with:
           name: relatorio-de-testes-${{ github.sha }}
           path: relatorio_testes.xml
           if-no-files-found: error
     - name: Upload do Pacote Buildado
       run: |
+        cd analise_dados
         with:
           name: pacote-buildado
           path: dist/
