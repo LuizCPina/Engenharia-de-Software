@@ -38,17 +38,14 @@ jobs:
         cd analise_dados
         poetry build
     - name: Upload do Relatório de Testes
-      run: |
-        with:
+      with:
           name: relatorio-de-testes-${{ github.sha }}
           path: relatorio_testes.xml
           if-no-files-found: error
     - name: Upload do Pacote Buildado
-      run: |
-        cd analise_dados
-        with:
+      with:
           name: pacote-buildado
-          path: dist/
+          path: analise_dados/dist/
           if-no-files-found: error
     - name: Enviar Notificação de Pipeline
       if: always()
