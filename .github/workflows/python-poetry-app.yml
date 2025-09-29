@@ -13,8 +13,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
-
+  setup:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,26 +28,35 @@ jobs:
         pip install poetry
         cd analise_dados
         poetry install
+  tests:
+    runs-on: ubuntu-latest
+    steps:
     - name: Test with pytest
       run: |
         cd analise_dados
         poetry run pytest --junitxml=relatorio_testes.xml
-    - name: Build with poetry
-      run: |
-        cd analise_dados
-        poetry build
     - name: Upload do Relatório de Testes
       uses: actions/upload-artifact@v4
       with:
           name: relatorio-de-testes-${{ github.sha }}
           path: analise_dados/relatorio_testes.xml
           if-no-files-found: error
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build with poetry
+      run: |
+        cd analise_dados
+        poetry build
     - name: Upload do Pacote Buildado
       uses: actions/upload-artifact@v4
       with:
           name: pacote-buildado
           path: analise_dados/dist/
           if-no-files-found: error
+  notificacao:
+    runs-on: ubuntu-latest
+    steps:
     - name: Enviar Notificação de Pipeline
       if: always()
       uses: dawidd6/action-send-mail@v3
