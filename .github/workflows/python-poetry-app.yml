@@ -57,7 +57,7 @@ jobs:
           password: ${{ secrets.MAIL_PASSWORD }}
       
          
-          to: seu.email.destinatario@exemplo.com # << MUDAR AQUI >>
+          to: ${{ vars.EMAIL }}
       
         
           subject: '[CI/CD Pipeline] Status do Projeto: ${{ github.repository }}'
