@@ -160,3 +160,4 @@ def test_desvio_padrao_lista_pequena_nao_chama_numpy(mocker):
     assert resultado == 0.0
     
     mock_np_std.assert_not_called()
+    
