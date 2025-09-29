@@ -39,7 +39,6 @@ jobs:
         poetry build
     - name: Upload do Relatório de Testes
       run: |
-        cd analise_dados
         with:
           name: relatorio-de-testes-${{ github.sha }}
           path: relatorio_testes.xml
@@ -55,7 +54,7 @@ jobs:
       if: always()
       uses: dawidd6/action-send-mail@v3
       with:
-          server_address: smtp.hotmail.com
+          server_address: smtp-mail.outlook.com
           server_port: 465
           secure: true
           
