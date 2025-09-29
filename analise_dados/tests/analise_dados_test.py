@@ -109,7 +109,7 @@ def test_calcular_media_com_mocker(mocker):
     
     assert resultado == 5.5
     
-    mock_np_mean.assert_called_once_with(dados_teste)
+    mock_np_mean.assert_called_once_with(dados_teste) 
 
 
 def test_calcular_desvio_padrao_com_mocker(mocker):
