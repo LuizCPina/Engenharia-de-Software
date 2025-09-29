@@ -29,6 +29,7 @@ jobs:
         cd analise_dados
         poetry install
   tests:
+    needs: [setup]
     runs-on: ubuntu-latest
     steps:
     - name: Test with pytest
@@ -41,6 +42,7 @@ jobs:
           path: analise_dados/relatorio_testes.xml
           if-no-files-found: error
   build:
+    needs: [setup]
     runs-on: ubuntu-latest
     steps:
     - name: Build with poetry
