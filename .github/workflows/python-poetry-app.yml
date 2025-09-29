@@ -33,7 +33,6 @@ jobs:
     steps:
     - name: Test with pytest
       run: |
-        cd analise_dados
         poetry run pytest --junitxml=relatorio_testes.xml
     - name: Upload do Relatório de Testes
       uses: actions/upload-artifact@v4
@@ -46,7 +45,6 @@ jobs:
     steps:
     - name: Build with poetry
       run: |
-        cd analise_dados
         poetry build
     - name: Upload do Pacote Buildado
       uses: actions/upload-artifact@v4
