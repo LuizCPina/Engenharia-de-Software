@@ -91,3 +91,72 @@ def test_mediana_um_elemento_np():
 def test_desvio_padrao_com_valores_nao_numericos():
     with pytest.raises(TypeError):
         calcular_desvio_padrao([1, "b", 3])
+
+#TESTES COM MOCK
+
+def test_calcular_media_com_mocker(mocker):
+    """
+    Testa se a função `calcular_media` chama np.mean com os dados corretos
+    e confirma que o resultado é o valor mockado.
+    """
+    dados_teste = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+    mock_np_mean = mocker.patch('src.poetry_demo.analise_dados.np.mean')
+    
+    mock_np_mean.return_value = 5.5
+    
+    resultado = calcular_media(dados_teste)
+    
+    assert resultado == 5.5
+    
+    mock_np_mean.assert_called_once_with(dados_teste)
+
+
+def test_calcular_desvio_padrao_com_mocker(mocker):
+    """
+    Testa se a função `calcular_desvio_padrao` chama np.std com os dados corretos.
+    """
+    dados_teste = [10, 20, 30, 40]
+    
+    mock_np_std = mocker.patch('src.poetry_demo.analise_dados.np.std')
+    mock_np_std.return_value = 11.18 
+    
+    resultado = calcular_desvio_padrao(dados_teste)
+    
+    assert resultado == 11.18
+    mock_np_std.assert_called_once_with(dados_teste)
+
+
+def test_calcular_mediana_com_mocker(mocker):
+    """
+    Testa se a função `calcular_mediana` chama np.median com os dados corretos.
+    """
+    dados_teste = [1, 100, 5]
+    
+    mock_np_median = mocker.patch('src.poetry_demo.analise_dados.np.median')
+
+    mock_np_median.return_value = 5.0 
+    
+    resultado = calcular_mediana(dados_teste)
+    
+    assert resultado == 5.0
+
+    mock_np_median.assert_called_once_with(dados_teste)
+
+
+# --- Teste da Lógica de Condição (Garantir que o NumPy NÃO é chamado) ---
+
+def test_desvio_padrao_lista_pequena_nao_chama_numpy(mocker):
+    """
+    Verifica se a lógica de 'if not dados or len(dados) < 2:' está correta,
+    evitando a chamada de np.std.
+    """
+    dados_pequenos = [42] 
+    
+    mock_np_std = mocker.patch('src.poetry_demo.analise_dados.np.std')
+    
+    resultado = calcular_desvio_padrao(dados_pequenos)
+    
+    assert resultado == 0.0
+    
+    mock_np_std.assert_not_called()
