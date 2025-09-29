@@ -38,11 +38,13 @@ jobs:
         cd analise_dados
         poetry build
     - name: Upload do Relatório de Testes
+      uses: actions/upload-artifact@v4
       with:
           name: relatorio-de-testes-${{ github.sha }}
           path: relatorio_testes.xml
           if-no-files-found: error
     - name: Upload do Pacote Buildado
+      uses: actions/upload-artifact@v4
       with:
           name: pacote-buildado
           path: analise_dados/dist/
